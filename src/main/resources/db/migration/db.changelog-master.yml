@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: db/migration/changes/initial-shema.yml
+      relativeToChangelogFile: false
+  - include:
+      file: db/migration/changes/card-management-shema.yml
+      relativeToChangelogFile: false
