@@ -1,6 +1,6 @@
 package com.example.bankcards.entity;
 
-import com.example.bankcards.service.YearMonthConver;
+import com.example.bankcards.util.YearMonthConver;
 import jakarta.persistence.*;
 
 import java.time.YearMonth;

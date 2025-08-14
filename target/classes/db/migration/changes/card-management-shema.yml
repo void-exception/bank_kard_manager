@@ -1,0 +1,149 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001
+      author: cardmanager
+      changes:
+        - createTable:
+            tableName: card
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: card_number
+                  type: varchar(16)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_card_user
+                    references: card_user(id)
+              - column:
+                  name: end_date
+                  type: varchar(7)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(10)
+                  defaultValue: "ACTIVE"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: balance
+                  type: double precision
+                  defaultValue: "0.0"
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: transaction
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_transaction_user
+                    references: card_user(id)
+              - column:
+                  name: from_card_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_transaction_from_card
+                    references: card(id)
+              - column:
+                  name: to_card_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_transaction_to_card
+                    references: card(id)
+              - column:
+                  name: local_date_time
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sum_transaction
+                  type: double precision
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: card_limit
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: card_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_limit_card
+                    references: card(id)
+              - column:
+                  name: sum
+                  type: double precision
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_limit
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: end_limit
+                  type: timestamp
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: statement
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: card_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_statement_card
+                    references: card(id)
+              - column:
+                  name: date_of_dispatch
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(20)
+                  defaultValue: "PENDING"
+                  constraints:
+                    nullable: false

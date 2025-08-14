@@ -8,7 +8,7 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/cardmanager
       - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=Svatzapomni1
+      - SPRING_DATASOURCE_PASSWORD=password
       - JWT_SECRET=$3crtCaRdMa3tew96y68uHeq8j1s2azWSz
       - ENCRYPTION_KEY=AbGSDb8gveqPVB9z
     depends_on:
@@ -23,7 +23,7 @@ services:
     environment:
       - POSTGRES_DB=cardmanager
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=Svatzapomni1
+      - POSTGRES_PASSWORD=password
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
